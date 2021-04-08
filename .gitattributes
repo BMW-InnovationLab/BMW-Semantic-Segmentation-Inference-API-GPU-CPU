@@ -1,0 +1,4 @@
+models/sample_model/configuration.json filter=lfs diff=lfs merge=lfs -text
+models/sample_model/model_best.params filter=lfs diff=lfs merge=lfs -text
+models/sample_model/palette_back.txt filter=lfs diff=lfs merge=lfs -text
+models/sample_model/palette.txt filter=lfs diff=lfs merge=lfs -text
