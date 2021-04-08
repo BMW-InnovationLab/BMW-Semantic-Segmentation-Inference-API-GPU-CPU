@@ -204,7 +204,7 @@ The configuration.json file should look like the following :
         "circle"
     ],
     "network": "fcn",
-    "type":"semantic",
+    "type":"segmentation",
     "epochs": 10,
     "lr": 0.001,
     "momentum": 0.9,
