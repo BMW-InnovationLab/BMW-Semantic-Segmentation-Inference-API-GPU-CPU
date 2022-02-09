@@ -1,4 +1,4 @@
-﻿FROM python:3.7
+﻿FROM python:3.8
 
 
 RUN apt-get update  && apt-get install --fix-missing -y \
@@ -12,24 +12,23 @@ RUN apt-get update  && apt-get install --fix-missing -y \
 					libopencv-dev \
 					graphviz \
                               libssl-dev
-RUN pip install --upgrade pip
+
+
+
 
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.16.5/cmake-3.16.5.tar.gz && tar -zxvf cmake-3.16.5.tar.gz && cd cmake-3.16.5 && ./bootstrap && make && make install 
 RUN git clone --recursive https://github.com/apache/incubator-mxnet.git -b v1.7.x
 RUN cd incubator-mxnet && mkdir build && cd build && cmake -DUSE_CUDA=OFF -DUSE_MKL_IF_AVAILABLE=ON -DUSE_MKLDNN=ON -DUSE_OPENMP=ON -DUSE_OPENCV=ON .. && make -j $(nproc) && cd ../python && python setup.py install
 
-RUN pip install Pillow \
-  		  pytest \
-  		# fastapi dependencies
-  		  fastapi[all] \
-  		# project dependencies
-  	  	  numpy \
-		  gluoncv \
-		  opencv-python
 
-RUN pip install jsonschema
+# copy package requirements
+COPY docker/CPU/requirements.txt .
+# install packages
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
 
-COPY /gluoncv /usr/local/lib/python3.6/site-packages/gluoncv/
+COPY /gluoncv /usr/local/lib/python3.8/site-packages/gluoncv/
+
 
 WORKDIR /main
 

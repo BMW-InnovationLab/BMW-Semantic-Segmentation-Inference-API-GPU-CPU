@@ -1,0 +1,34 @@
+FROM nvidia/cuda:11.2.1-cudnn8-runtime-ubuntu18.04
+
+LABEL maintainer "BMW InnovationLab"
+ARG DEBIAN_FRONTEND=noninteractive
+
+
+COPY src/main /main
+
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+  locales \
+  software-properties-common \
+  python3-pip \
+  python3-dev \
+  pkg-config \
+  ffmpeg
+
+# copy package requirements
+COPY docker/GPU/requirements.txt .
+
+# install packages
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
+
+# configure uvicorn
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+  dpkg-reconfigure --frontend=noninteractive locales && \
+  update-locale LANG=en_US.UTF-8
+
+ENV LANG en_US.UTF-8 
+COPY /gluoncv /usr/local/lib/python3.6/dist-packages/gluoncv 
+
+WORKDIR /main
+
+CMD ["uvicorn", "start:app", "--host", "0.0.0.0", "--port", "4343"]

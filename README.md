@@ -62,13 +62,13 @@ To build the docker environment, run the following command in the project's dire
 - For GPU Build:  
 
 ```sh
-docker build -t gluoncv_segmentation_inference_api_gpu -f ./GPU/dockerfile .
+docker build -t gluoncv_segmentation_inference_api_gpu -f ./docker/GPU/dockerfile .
 ```
 
 - For CPU Build:
 
 ```
-docker build -t gluoncv_segmentation_inference_api_cpu -f ./CPU/dockerfile .
+docker build -t gluoncv_segmentation_inference_api_cpu -f ./docker/CPU/dockerfile .
 ```
 
 
@@ -78,13 +78,13 @@ docker build -t gluoncv_segmentation_inference_api_cpu -f ./CPU/dockerfile .
 - For GPU Build:  
 
 ```sh
-docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_segmentation_inference_api_gpu -f ./GPU/dockerfile .
+docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_segmentation_inference_api_gpu -f ./docker/GPU/dockerfile .
 ```
 
 - For CPU Build:
 
 ```sh
-docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_segmentation_inference_api_cpu -f ./CPU/dockerfile .
+docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_segmentation_inference_api_cpu -f ./docker/CPU/dockerfile .
 ```
 
 
