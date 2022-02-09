@@ -16,7 +16,7 @@ This repository can be deployed using  **docker**.
 
 - Ubuntu 18.04 or 20.04 LTS
 - Windows 10 pro with **hyper-v** enabled and **docker** desktop 
-- NVIDIA Drivers (410.x or higher) 
+- NVIDIA Drivers (418.x or higher) 
 - Docker CE latest stable release
 - NVIDIA Docker 2
 - Git lfs (large file storage) : [installation](https://github.com/git-lfs/git-lfs/wiki/Installation)
