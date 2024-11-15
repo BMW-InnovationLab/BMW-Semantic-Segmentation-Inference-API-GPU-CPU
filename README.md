@@ -61,7 +61,12 @@ To build the docker environment, run the following command in the project's dire
 
 - For GPU Build:  
 
+> **_NOTE:_**  Follow this link to acquire nvcr private key:
+> https://docs.nvidia.com/launchpad/ai/base-command-coe/latest/bc-coe-docker-basics-step-02.html 
+
+
 ```sh
+docker login nvcr.io
 docker build -t gluoncv_segmentation_inference_api_gpu -f ./docker/GPU/dockerfile .
 ```
 
@@ -77,7 +82,12 @@ docker build -t gluoncv_segmentation_inference_api_cpu -f ./docker/CPU/dockerfil
 
 - For GPU Build:  
 
+> **_NOTE:_**  Follow this link to acquire nvcr private key:
+> https://docs.nvidia.com/launchpad/ai/base-command-coe/latest/bc-coe-docker-basics-step-02.html 
+
+
 ```sh
+docker login nvcr.io
 docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_segmentation_inference_api_gpu -f ./docker/GPU/dockerfile .
 ```
 
