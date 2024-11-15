@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.2.1-cudnn8-runtime-ubuntu18.04
+FROM nvcr.io/nvidia/cuda:11.2.1-cudnn8-runtime-ubuntu18.04
 
 LABEL maintainer "BMW InnovationLab"
 ARG DEBIAN_FRONTEND=noninteractive
@@ -26,8 +26,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
   dpkg-reconfigure --frontend=noninteractive locales && \
   update-locale LANG=en_US.UTF-8
 
-ENV LANG en_US.UTF-8 
-COPY /gluoncv /usr/local/lib/python3.6/dist-packages/gluoncv 
+ENV LANG en_US.UTF-8
 
 WORKDIR /main
 
