@@ -16,7 +16,7 @@ This repository can be deployed using  **docker**.
 
 - Ubuntu 18.04 or 20.04 LTS
 - Windows 10 pro with **hyper-v** enabled and **docker** desktop 
-- NVIDIA Drivers (410.x or higher) 
+- NVIDIA Drivers (418.x or higher) 
 - Docker CE latest stable release
 - NVIDIA Docker 2
 - Git lfs (large file storage) : [installation](https://github.com/git-lfs/git-lfs/wiki/Installation)
@@ -61,14 +61,19 @@ To build the docker environment, run the following command in the project's dire
 
 - For GPU Build:  
 
+> **_NOTE:_**  Follow this link to acquire nvcr private key:
+> https://docs.nvidia.com/launchpad/ai/base-command-coe/latest/bc-coe-docker-basics-step-02.html 
+
+
 ```sh
-docker build -t gluoncv_segmentation_inference_api_gpu -f ./GPU/dockerfile .
+docker login nvcr.io
+docker build -t gluoncv_segmentation_inference_api_gpu -f ./docker/GPU/dockerfile .
 ```
 
 - For CPU Build:
 
 ```
-docker build -t gluoncv_segmentation_inference_api_cpu -f ./CPU/dockerfile .
+docker build -t gluoncv_segmentation_inference_api_cpu -f ./docker/CPU/dockerfile .
 ```
 
 
@@ -77,14 +82,19 @@ docker build -t gluoncv_segmentation_inference_api_cpu -f ./CPU/dockerfile .
 
 - For GPU Build:  
 
+> **_NOTE:_**  Follow this link to acquire nvcr private key:
+> https://docs.nvidia.com/launchpad/ai/base-command-coe/latest/bc-coe-docker-basics-step-02.html 
+
+
 ```sh
-docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_segmentation_inference_api_gpu -f ./GPU/dockerfile .
+docker login nvcr.io
+docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_segmentation_inference_api_gpu -f ./docker/GPU/dockerfile .
 ```
 
 - For CPU Build:
 
 ```sh
-docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_segmentation_inference_api_cpu -f ./CPU/dockerfile .
+docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_segmentation_inference_api_cpu -f ./docker/CPU/dockerfile .
 ```
 
 

@@ -1,3 +1,4 @@
+
 FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04
 
 
@@ -16,13 +17,13 @@ COPY src/main /main
 
 # Fix Nvidia/Cuda repository key rotation
 RUN sed -i '/developer\.download\.nvidia\.com\/compute\/cuda\/repos/d' /etc/apt/sources.list.d/*
-RUN sed -i '/developer\.download\.nvidia\.com\/compute\/machine-learning\/repos/d' /etc/apt/sources.list.d/*  
+RUN sed -i '/developer\.download\.nvidia\.com\/compute\/machine-learning\/repos/d' /etc/apt/sources.list.d/*
 RUN apt-key del 7fa2af80 &&\
     apt-get update && \
     apt-get  install -y wget && \
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb && \
     dpkg -i cuda-keyring_1.0-1_all.deb
-    
+
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
   locales \
   software-properties-common \
@@ -31,7 +32,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
   cuda-cufft-10-2 \
   cuda-curand-10-2 \
   cuda-cusolver-10-2 \
-  cuda-cusparse-10-2 
+  cuda-cusparse-10-2
 RUN apt-get -y install python-opencv
 RUN pip3 install --upgrade pip
 
@@ -49,9 +50,9 @@ RUN pip3 install mxnet-cu102mkl
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
   dpkg-reconfigure --frontend=noninteractive locales && \
   update-locale LANG=en_US.UTF-8
-ENV LANG en_US.UTF-8 
-COPY /gluoncv /usr/local/lib/python3.6/dist-packages/gluoncv 
+ENV LANG en_US.UTF-8
+COPY /gluoncv /usr/local/lib/python3.6/dist-packages/gluoncv
 
 WORKDIR /main
-    
+
 CMD ["uvicorn", "start:app", "--host", "0.0.0.0", "--port", "4343"]
